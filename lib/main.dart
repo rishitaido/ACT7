@@ -12,22 +12,22 @@ void main() {
 
 // Mood Model - The "Brain" of our app
 class MoodModel with ChangeNotifier {
-  String _currentMood = '😊 use your own img here ';
+  String _currentMood = 'images/sad_charizard.jpeg';
 
   String get currentMood => _currentMood;
 
   void setHappy() {
-    _currentMood = '😊 use your own img here ';
+    _currentMood = 'images/happy_squirtle.webp';
     notifyListeners();
   }
 
   void setSad() {
-    _currentMood = '😢 use your own img here ';
+    _currentMood = 'images/sad_charizard.jpeg';
     notifyListeners();
   }
 
   void setExcited() {
-    _currentMood = '🎉 use your own img here ';
+    _currentMood = 'images/excited_gengar.webp';
     notifyListeners();
   }
 }
@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Mood Toggle Challenge')),
+      appBar: AppBar(title: Text('Mood Toggle Challenge', style: TextStyle(color: Colors.white)), backgroundColor: const Color.fromARGB(255, 63, 1, 1),),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -72,7 +72,7 @@ class MoodDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MoodModel>(
       builder: (context, moodModel, child) {
-        return Text(moodModel.currentMood, style: TextStyle(fontSize: 100));
+        return Image.asset(moodModel.currentMood, width: 550, height: 300,);
       },
     );
   }
@@ -89,19 +89,19 @@ class MoodButtons extends StatelessWidget {
           onPressed: () {
             Provider.of<MoodModel>(context, listen: false).setHappy();
           },
-          child: Text('Happy 😊 use your own img here '),
+          child: Text('Happy 😊'),
         ),
         ElevatedButton(
           onPressed: () {
             Provider.of<MoodModel>(context, listen: false).setSad();
           },
-          child: Text('Sad 😢 use your own img here '),
+          child: Text('Sad 😢'),
         ),
         ElevatedButton(
           onPressed: () {
             Provider.of<MoodModel>(context, listen: false).setExcited();
           },
-          child: Text('Excited 🎉 use your own img here '),
+          child: Text('Excited 🎉'),
         ),
       ],
     );
