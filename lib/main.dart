@@ -22,7 +22,7 @@ class MoodModel with ChangeNotifier {
 
   Map<String, int> get moodCounts => _moodCounts;
   
-  Map<String, int> _moodCounts = {
+  final Map<String, int> _moodCounts = {
     'Happy': 0,
     'Sad': 0,
     'Excited': 0,
@@ -45,7 +45,7 @@ class MoodModel with ChangeNotifier {
   void setExcited() {
     _currentMood = 'images/excited_gengar.webp';
     _moodCounts['Excited'] = _moodCounts['Excited']! + 1;
-    _backgroundColor = Colors.lightGreen.shade100;
+    _backgroundColor = const Color.fromARGB(255, 146, 255, 21);
     notifyListeners();
   }
 
@@ -125,9 +125,9 @@ class MoodDisplay extends StatelessWidget {
       builder: (context, moodModel, child) {
         return Image.asset(
           moodModel.currentMood, 
-          width: 350,  // Reduced from 550 to avoid overflow
-          height: 200, // Made it square for better proportions
-          fit: BoxFit.contain, // Added to maintain aspect ratio
+          width: 350,
+          height: 200,
+          fit: BoxFit.contain,
         );
       },
     );
@@ -250,14 +250,14 @@ class RandomMoodButton extends StatelessWidget{
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            color: Colors.purple.withOpacity(0.3), // FIXED: Changed from 30 to 0.3
+            color: Colors.purple.withOpacity(0.3),
             spreadRadius: 2,
             blurRadius: 8,
             offset: Offset(0, 3),
           ),
         ],
       ),
-      child: ElevatedButton( // FIXED: Added ElevatedButton wrapper
+      child: ElevatedButton(
         onPressed: () {
           Provider.of<MoodModel>(context, listen: false).setRandomMood();
         },
